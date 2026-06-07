@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HostCare - Profile</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{
+  font-family:'Poppins',sans-serif;
+  background:#ffe6f0;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:absolute;width:600px;height:600px;
+  background:radial-gradient(circle,#ffb6c1,#ff69b4,#ff1493);
+  filter:blur(120px);
+  border-radius:50%;
+  animation:move1 12s infinite alternate;
+  opacity:0.6;
+  top:-100px;left:-150px;
+}
+body::after{
+  content:"";
+  position:absolute;width:400px;height:400px;
+  background:radial-gradient(circle,#ffc0cb,#ff69b4,#ff1493);
+  filter:blur(100px);
+  border-radius:50%;
+  animation:move2 8s infinite alternate-reverse;
+  opacity:0.5;
+  bottom:-50px;right:-50px;
+}
+@keyframes move1{from{transform:translate(-200px,-200px);}to{transform:translate(200px,200px);} }
+@keyframes move2{from{transform:translate(150px,150px);}to{transform:translate(-150px,-150px);} }
+
+.navbar{background:rgba(255,192,203,0.95);backdrop-filter:blur(5px);}
+.navbar-buttons{margin-left:auto;display:flex;gap:10px;align-items:center;}
+.btn-gradient{
+  background:linear-gradient(90deg,#ff69b4,#ff1493);
+  color:white;font-weight:600;border-radius:8px;padding:6px 14px;
+  border:none;transition:0.3s;cursor:pointer;
+}
+.btn-gradient:hover{transform:scale(1.05);box-shadow:0 0 20px #ff1493;}
+
+.profile-card{
+  background:rgba(255,255,255,0.95);
+  max-width:900px;margin:30px auto;
+  border-radius:20px;padding:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
+  display:flex;flex-wrap:wrap;align-items:flex-start;
+}
+.profile-pic{flex:0 0 150px;text-align:center;margin-right:30px;}
+.profile-pic img{width:130px;height:130px;border-radius:50%;border:4px solid #ff69b4;object-fit:cover;}
+.profile-info{flex:1;min-width:300px;}
+.profile-info .info-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f1f1f1;}
+.profile-info .info-row:last-child{border-bottom:none;}
+.profile-info .info-label{font-weight:600;color:#555;min-width:120px;}
+.profile-info .info-value{color:#004d40;font-weight:500;text-align:right;word-break:break-word;}
+
+.kpi-section{margin-top:20px;}
+.kpi-card{
+  background:rgba(255,255,255,0.95);
+  padding:25px;border-radius:15px;text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  transition:0.3s;margin-bottom:15px;height:150px;display:flex;flex-direction:column;justify-content:center;
+}
+.kpi-card:hover{transform:scale(1.05);box-shadow:0 10px 25px rgba(0,0,0,0.2);}
+.kpi-card h5{font-weight:700;margin-bottom:10px;}
+.kpi-card h2{color:#004d40;}
+
+.action-buttons{margin-top:20px;text-align:center;}
+.action-buttons button{margin:5px;padding:12px 22px;border-radius:8px;font-weight:600;cursor:pointer;}
+.btn-add{background:#ff69b4;color:white;font-size:16px;}
+.btn-add:hover{background:#ff1493;transform:scale(1.05);}
+
+.chart-card{
+  background:rgba(255,255,255,0.95);
+  padding:20px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  max-width:900px;margin:30px auto;
+}
+.chart-card canvas{max-height:250px !important;}
+
+.activity-section{
+  max-width:900px;margin:30px auto;
+  background:rgba(255,255,255,0.95);
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+.activity-section h4{color:#004d40;margin-bottom:15px;}
+.activity-card{
+  background:#fff3f8;
+  padding:10px 15px;
+  margin-bottom:10px;
+  border-radius:10px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.footer-box{
+  background: rgba(255,192,203,0.95);
+  border-radius:15px;
+  padding:15px;
+  text-align:center;
+  margin:30px 10px 20px 10px;
+  font-size:13px;color:#004d40;
+  backdrop-filter: blur(5px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg px-4 sticky-top">
+  <a class="navbar-brand fw-bold" href="dashboard.html">
+    <img src="./logo.jpg" style="height:40px;margin-right:10px;"> HostCare
+  </a>
+  <div class="navbar-buttons">
+    <div class="dropdown">
+      <button class="btn-gradient dropdown-toggle" type="button" data-bs-toggle="dropdown">Menu</button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
+        <li><a class="dropdown-item" href="complaints.html">Complaints</a></li>
+        <li><a class="dropdown-item" href="students.html">Students</a></li>
+        <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+        <li><a class="dropdown-item" href="about.html">About</a></li>
+      </ul>
+    </div>
+    <button class="btn-gradient" onclick="browseAnything()">🔍 Search</button>
+    <button class="btn-gradient" onclick="location.href='index.html'">⏏️ Logout</button>
+  </div>
+</nav>
+
+<div class="profile-card">
+  <div class="profile-pic">
+    <img src="./Admin.jpg" alt="Admin Profile">
+    <h5 id="profileName">Hanees</h5>
+    <p id="profileRole">Hostel Manager</p>
+  </div>
+  <div class="profile-info">
+    <div class="info-row"><span class="info-label">Name:</span><span class="info-value" id="profileNameInput">Hanees</span></div>
+    <div class="info-row"><span class="info-label">Email:</span><span class="info-value" id="profileEmail">admin@hostcare.com</span></div>
+    <div class="info-row"><span class="info-label">Phone:</span><span class="info-value" id="profilePhone">+60 12-345 6789</span></div>
+    <div class="info-row"><span class="info-label">Role:</span><span class="info-value" id="profileRoleInput">Admin</span></div>
+    <div class="info-row"><span class="info-label">Department:</span><span class="info-value" id="profileDept">Hostel Management</span></div>
+    <div class="info-row"><span class="info-label">Date Joined:</span><span class="info-value" id="profileDateJoined">2025-01-15</span></div>
+    <div class="info-row"><span class="info-label">Last Login:</span><span class="info-value" id="profileLastLogin">2026-06-06 08:00 AM</span></div>
+  </div>
+</div>
+
+<div class="container kpi-section">
+  <div class="row text-center">
+    <div class="col-md-3"><div class="kpi-card"><h5>Complaints Submitted</h5><h2>120</h2></div></div>
+    <div class="col-md-3"><div class="kpi-card"><h5>Resolved</h5><h2>80</h2></div></div>
+    <div class="col-md-3"><div class="kpi-card"><h5>Pending</h5><h2>40</h2></div></div>
+    <div class="col-md-3"><div class="kpi-card"><h5>Total Students</h5><h2>450</h2></div></div>
+  </div>
+</div>
+
+<div class="action-buttons">
+  <button class="btn-add" id="addComplaintBtn">➕ Add Complaint</button>
+  <button class="btn-add" id="updatePasswordBtn">🔑 Change Password</button>
+  <button class="btn-add" id="updateProfileBtn">✏️ Update Profile</button>
+</div>
+
+<div class="chart-card">
+  <h5>📊 Complaint Status Distribution</h5>
+  <canvas id="profileChart"></canvas>
+</div>
+
+<div class="activity-section">
+  <h4>📝 Recent Activity</h4>
+  <div class="activity-card">Added complaint for student Alya</div>
+  <div class="activity-card">Resolved complaint ID C045</div>
+  <div class="activity-card">Updated student room assignment for Sara</div>
+  <div class="activity-card">Reviewed pending complaints</div>
+  <div class="activity-card">Generated monthly report</div>
+</div>
+
+<div class="footer-box">© 2026 HostCare System — Developed by Hanees</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const ctx = document.getElementById('profileChart').getContext('2d');
+new Chart(ctx,{
+  type:'doughnut',
+  data:{
+    labels:['In Progress ⏳','Pending ⏳','Resolved ✅'],
+    datasets:[{data:[1,1,2],backgroundColor:['#ff69b4','#ffeb3b','#26a69a']}]
+  },
+  options:{responsive:true,plugins:{legend:{position:'bottom'}}}
+});
+
+// Add Complaint Button
+document.getElementById('addComplaintBtn').addEventListener('click', ()=>{
+  window.location.href = 'complaints.html';
+});
+
+// Change Password
+document.getElementById('updatePasswordBtn').addEventListener('click', ()=>{
+  const username = prompt("Enter your username:");
+  const newPass = prompt("Enter new password:");
+  const confirmPass = prompt("Confirm new password:");
+  if(newPass && newPass === confirmPass){
+    alert("Password updated successfully!");
+  } else {
+    alert("Passwords do not match or empty!");
+  }
+});
+
+// Update Profile Info
+document.getElementById('updateProfileBtn').addEventListener('click', ()=>{
+  const newName = prompt("Enter new name:");
+  const newEmail = prompt("Enter new email:");
+  const newRole = prompt("Enter new role:");
+  const newDept = prompt("Enter new department:");
+  if(newName) {
+    document.getElementById('profileName').innerText = newName;
+    document.getElementById('profileNameInput').innerText = newName;
+  }
+  if(newEmail) document.getElementById('profileEmail').innerText = newEmail;
+  if(newRole) {
+    document.getElementById('profileRole').innerText = newRole;
+    document.getElementById('profileRoleInput').innerText = newRole;
+  }
+  if(newDept) document.getElementById('profileDept').innerText = newDept;
+});
+
+function browseAnything(){const term=prompt("Search...");if(term)alert("You typed '"+term+"'");}
+</script>
+</body>
+</html>
